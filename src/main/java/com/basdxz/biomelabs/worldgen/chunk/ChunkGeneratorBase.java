@@ -57,8 +57,8 @@ import java.util.Random;
 public abstract class ChunkGeneratorBase implements IChunkProvider {
     public static final double DEFAULT_NOISE_FREQUENCY = ChunkUtil.CHUNK_LENGTH_WIDTH_INV * 0.1D;
     public static final double DEFAULT_NOISE_CONTRAST = 3D;
-    public static final int DEFAULT_MIN_BLOCK_HEIGHT = 50;
-    public static final int DEFAULT_MAX_BLOCK_HEIGHT = 90;
+    public static final int DEFAULT_MIN_BLOCK_HEIGHT = 60;
+    public static final int DEFAULT_MAX_BLOCK_HEIGHT = 80;
     public static final Block DEFAULT_STONE_BLOCK = Blocks.stone;
     public static final byte DEFAULT_STONE_BLOCK_META = 0;
 
@@ -145,13 +145,21 @@ public abstract class ChunkGeneratorBase implements IChunkProvider {
         return (int) Math.round(MathUtils.map(noise, 0, 1, minBlockHeight(), maxBlockHeight()));
     }
 
-    public abstract int minBlockHeight();
+    public int minBlockHeight() {
+        return DEFAULT_MIN_BLOCK_HEIGHT;
+    }
 
-    public abstract int maxBlockHeight();
+    public int maxBlockHeight(){
+        return DEFAULT_MAX_BLOCK_HEIGHT;
+    }
 
-    public abstract Block stoneBlock();
+    public Block stoneBlock(){
+        return DEFAULT_STONE_BLOCK;
+    }
 
-    public abstract byte stoneBlockMeta();
+    public byte stoneBlockMeta(){
+        return DEFAULT_STONE_BLOCK_META;
+    }
 
     public void replaceBlocksForBiome(int chunkPosX, int chunkPosZ, int blockPosX, int blockPosZ, Block[] blocks, byte[] blockMetas, double[] stoneNoise) {
         biomes = world.getWorldChunkManager().loadBlockGeneratorData(biomes, blockPosX, blockPosZ, ChunkUtil.CHUNK_LENGTH_WIDTH, ChunkUtil.CHUNK_LENGTH_WIDTH);
