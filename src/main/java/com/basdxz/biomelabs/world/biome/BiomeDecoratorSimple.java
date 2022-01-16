@@ -23,7 +23,7 @@
  *
  */
 
-package com.basdxz.biomelabs.worldgen.biome;
+package com.basdxz.biomelabs.world.biome;
 
 import net.minecraft.world.biome.BiomeDecorator;
 import net.minecraft.world.biome.BiomeGenBase;

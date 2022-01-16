@@ -23,14 +23,14 @@
  *
  */
 
-package com.basdxz.biomelabs.worldgen.chunk;
+package com.basdxz.biomelabs.world.chunk;
 
 import com.basdxz.biomelabs.util.ChunkUtil;
 import com.basdxz.biomelabs.util.MathUtils;
 import com.basdxz.biomelabs.util.NoiseUtil;
 import com.basdxz.biomelabs.util.RandomUtil;
-import com.basdxz.biomelabs.worldgen.noise.Contrast;
-import com.basdxz.biomelabs.worldgen.noise.INoiseGenerator;
+import com.basdxz.biomelabs.world.noise.Contrast;
+import com.basdxz.biomelabs.world.noise.INoiseGenerator;
 import cpw.mods.fml.common.eventhandler.Event;
 import lombok.val;
 import net.minecraft.block.Block;

@@ -23,28 +23,25 @@
  *
  */
 
-package com.basdxz.biomelabs.worldgen.feature;
+package com.basdxz.biomelabs.world.feature;
 
-import com.basdxz.biomelabs.util.ChunkUtil;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+import net.minecraft.world.chunk.Chunk;
 
-public class CraterFeatureGenerator extends ChunkFeatureGenerator {
-    protected final int minRadius;
-    protected final int maxRadius;
+import java.util.Random;
 
-    public CraterFeatureGenerator(float generationChance, int minRadius, int maxRadius) {
-        super(random -> random.nextFloat() <= generationChance);
-        this.minRadius = minRadius;
-        this.maxRadius = maxRadius;
-    }
+import static lombok.AccessLevel.PRIVATE;
 
-    @Override
-    protected int maxChunkRadius() {
-        return ChunkUtil.blockPosToChunkPos(maxRadius) + 1;
-    }
+@Accessors(fluent = true)
+@NoArgsConstructor(access = PRIVATE)
+public final class EmptyWorldFeature implements IWorldFeature {
+    @Getter
+    private final static IWorldFeature INSTANCE = new EmptyWorldFeature();
 
     @Override
-    protected IWorldFeature newWorldFeature() {
-        return CraterFeature.newCraterFeature(
-                random, offsetChunkPos, minRadius, maxRadius, 5, 10, 1, 5);
+    public boolean generate(Random random, Chunk currentChunk) {
+        return false;
     }
 }

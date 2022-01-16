@@ -23,7 +23,7 @@
  *
  */
 
-package com.basdxz.biomelabs.worldgen.feature;
+package com.basdxz.biomelabs.world.feature;
 
 import com.basdxz.biomelabs.util.ChunkUtil;
 import com.basdxz.biomelabs.util.RandomUtil;

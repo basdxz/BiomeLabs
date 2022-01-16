@@ -23,12 +23,28 @@
  *
  */
 
-package com.basdxz.biomelabs.worldgen.feature;
+package com.basdxz.biomelabs.world.feature;
 
-import net.minecraft.world.chunk.Chunk;
+import com.basdxz.biomelabs.util.ChunkUtil;
 
-import java.util.Random;
+public class CraterFeatureGenerator extends ChunkFeatureGenerator {
+    protected final int minRadius;
+    protected final int maxRadius;
 
-public interface IWorldFeature {
-    boolean generate(Random random, Chunk currentChunk);
+    public CraterFeatureGenerator(float generationChance, int minRadius, int maxRadius) {
+        super(random -> random.nextFloat() <= generationChance);
+        this.minRadius = minRadius;
+        this.maxRadius = maxRadius;
+    }
+
+    @Override
+    protected int maxChunkRadius() {
+        return ChunkUtil.blockPosToChunkPos(maxRadius) + 1;
+    }
+
+    @Override
+    protected IWorldFeature newWorldFeature() {
+        return CraterFeature.newCraterFeature(
+                random, offsetChunkPos, minRadius, maxRadius, 5, 10, 1, 5);
+    }
 }

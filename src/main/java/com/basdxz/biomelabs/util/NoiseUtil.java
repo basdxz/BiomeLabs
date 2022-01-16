@@ -25,7 +25,7 @@
 
 package com.basdxz.biomelabs.util;
 
-import com.basdxz.biomelabs.worldgen.noise.INoiseGenerator;
+import com.basdxz.biomelabs.world.noise.INoiseGenerator;
 import lombok.NoArgsConstructor;
 import lombok.val;
 

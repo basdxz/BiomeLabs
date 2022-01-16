@@ -29,6 +29,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -40,6 +41,7 @@ import org.lwjgl.opengl.GL11;
 
 import static lombok.AccessLevel.PRIVATE;
 
+@Accessors(fluent = true)
 @NoArgsConstructor(access = PRIVATE)
 public final class DarkSky extends IRenderHandler {
     @Getter

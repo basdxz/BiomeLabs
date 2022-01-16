@@ -23,25 +23,12 @@
  *
  */
 
-package com.basdxz.biomelabs.worldgen.feature;
+package com.basdxz.biomelabs.world.feature;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 import net.minecraft.world.chunk.Chunk;
 
 import java.util.Random;
 
-import static lombok.AccessLevel.PRIVATE;
-
-@Accessors(fluent = true)
-@NoArgsConstructor(access = PRIVATE)
-public final class EmptyWorldFeature implements IWorldFeature {
-    @Getter
-    private final static IWorldFeature INSTANCE = new EmptyWorldFeature();
-
-    @Override
-    public boolean generate(Random random, Chunk currentChunk) {
-        return false;
-    }
+public interface IWorldFeature {
+    boolean generate(Random random, Chunk currentChunk);
 }

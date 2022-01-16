@@ -23,7 +23,7 @@
  *
  */
 
-package com.basdxz.biomelabs.worldgen.noise;
+package com.basdxz.biomelabs.world.noise;
 
 public interface INoiseGenerator {
     double generate(double posX, double posZ);

@@ -23,7 +23,7 @@
  *
  */
 
-package com.basdxz.biomelabs.worldgen.noise;
+package com.basdxz.biomelabs.world.noise;
 
 import com.basdxz.biomelabs.util.NoiseUtil;
 import lombok.val;

@@ -23,7 +23,7 @@
  *
  */
 
-package com.basdxz.biomelabs.worldgen.biome;
+package com.basdxz.biomelabs.world.biome;
 
 import com.basdxz.biomelabs.util.ChunkUtil;
 import lombok.val;
