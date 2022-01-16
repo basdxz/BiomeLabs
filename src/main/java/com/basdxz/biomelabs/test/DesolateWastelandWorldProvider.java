@@ -23,45 +23,16 @@
  *
  */
 
-package com.basdxz.biomelabs.world.provider;
+package com.basdxz.biomelabs.test;
 
-import com.basdxz.biomelabs.render.DarkSky;
-import com.basdxz.biomelabs.render.EmptyRenderHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.util.Vec3;
-import net.minecraft.world.WorldProvider;
+import com.basdxz.biomelabs.world.provider.WorldProviderBase;
+import lombok.experimental.Accessors;
 import net.minecraft.world.biome.WorldChunkManager;
-import net.minecraftforge.client.IRenderHandler;
 
-public abstract class WorldProviderBase extends WorldProvider {
-    @Override
-    public void registerWorldChunkManager() {
-        dimensionId = dimensionId();
-        worldChunkMgr = worldChunkManager();
-    }
 
-    protected abstract int dimensionId();
+@Accessors(fluent = true)
+public abstract class DesolateWastelandWorldProvider extends WorldProviderBase {
+    public abstract void dimID(int dimID);
 
-    protected abstract WorldChunkManager worldChunkManager();
-
-    @Override
-    public IRenderHandler getSkyRenderer() {
-        return DarkSky.INSTANCE();
-    }
-
-    @Override
-    public IRenderHandler getCloudRenderer() {
-        return EmptyRenderHandler.INSTANCE();
-    }
-
-    @Override
-    public IRenderHandler getWeatherRenderer() {
-        return EmptyRenderHandler.INSTANCE();
-    }
-
-    @SideOnly(Side.CLIENT)
-    public Vec3 getFogColor(float f, float f0) {
-        return Vec3.createVectorHelper(0, 0, 0);
-    }
+    public abstract void chunkManager(WorldChunkManager chunkManager);
 }

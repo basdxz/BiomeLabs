@@ -45,7 +45,7 @@ public class WastelandSoilBlock extends Block {
     protected final String modid;
 
     protected IIcon topSoil;
-    protected IIcon bottomSoil;
+    protected IIcon fillerSoil;
 
     public WastelandSoilBlock(String dimName, String modid) {
         super(Material.ground);
@@ -71,12 +71,12 @@ public class WastelandSoilBlock extends Block {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
-        bottomSoil = iconRegister.registerIcon(MessageFormat.format("{0}:{1}/{1}_bottomSoil", modid, dimName));
-        topSoil = iconRegister.registerIcon(MessageFormat.format("{0}:{1}/{1}_topSoil", modid, dimName));
+        fillerSoil = iconRegister.registerIcon(MessageFormat.format("{0}:{1}/{1}_bottomSoil", modid, dimName));
+        topSoil = iconRegister.registerIcon(MessageFormat.format("{0}:{1}/{1}_fillerSoil", modid, dimName));
     }
 
     @Override
     public IIcon getIcon(int side, int meta) {
-        return meta > 0 ? bottomSoil : topSoil;
+        return meta > 0 ? fillerSoil : topSoil;
     }
 }

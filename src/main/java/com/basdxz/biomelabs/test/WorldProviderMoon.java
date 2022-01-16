@@ -23,17 +23,36 @@
  *
  */
 
-package com.basdxz.biomelabs.world.chunk;
+package com.basdxz.biomelabs.test;
 
-import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraft.world.biome.WorldChunkManagerHell;
+import net.minecraft.world.biome.WorldChunkManager;
 
-public class WorldChunkManagerMonoBiome extends WorldChunkManagerHell {
-    public WorldChunkManagerMonoBiome(BiomeGenBase biome) {
-        super(biome, 0F);
+public class WorldProviderMoon extends DesolateWastelandWorldProvider {
+    protected static int dimID;
+    protected static WorldChunkManager chunkManager;
+
+    @Override
+    public void dimID(int dimID) {
+        WorldProviderMoon.dimID = dimID;
     }
 
-    public WorldChunkManagerMonoBiome(BiomeGenBase biome, float rainfall) {
-        super(biome, rainfall);
+    @Override
+    public void chunkManager(WorldChunkManager chunkManager) {
+        WorldProviderMoon.chunkManager = chunkManager;
+    }
+
+    @Override
+    protected int dimensionId() {
+        return dimID;
+    }
+
+    @Override
+    protected WorldChunkManager worldChunkManager() {
+        return chunkManager;
+    }
+
+    @Override
+    public String getDimensionName() {
+        return "Moon";
     }
 }
