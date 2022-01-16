@@ -26,6 +26,7 @@ public class WastelandSoilBlock extends Block {
         super(Material.ground);
         this.dimName = dimName;
         this.modid = modid;
+        setBlockName(String.format("%s_soil", dimName.toLowerCase()));
         GameRegistry.registerBlock(this, WastelandSoilItemBlock.class, getUnlocalizedName());
     }
 
