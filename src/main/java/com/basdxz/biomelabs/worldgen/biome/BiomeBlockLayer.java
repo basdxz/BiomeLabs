@@ -34,13 +34,13 @@ import net.minecraft.block.Block;
 @Data
 @Accessors(fluent = true)
 @AllArgsConstructor
-public class BlockLayer {
+public class BiomeBlockLayer {
     protected final Block block;
     protected final byte blockMeta;
     protected final int minThickness;
     protected final int maxThickness;
 
-    public BlockLayer(Block block, byte blockMeta, int thickness) {
+    public BiomeBlockLayer(Block block, byte blockMeta, int thickness) {
         this.block = block;
         this.blockMeta = blockMeta;
         this.minThickness = thickness;

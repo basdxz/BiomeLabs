@@ -41,8 +41,13 @@ import java.util.Random;
 
 public abstract class BiomeGenBaseSimple extends BiomeGenBase {
     protected final static int BEDROCK_THICKNESS = 5;
+    protected final static Block DEFAULT_TOP_BLOCK = Blocks.grass;
+    protected final static byte DEFAULT_TOP_BLOCK_META = 0;
+    protected final static Block DEFAULT_FILLER_BLOCK = Blocks.dirt;
+    protected final static byte DEFAULT_FILLER_BLOCK_META = 0;
+    protected final static byte DEFAULT_MIN_TERRAIN_HEIGHT = 50;
 
-    protected final List<BlockLayer> blockLayers;
+    protected final List<BiomeBlockLayer> blockLayers;
 
     public BiomeGenBaseSimple(int biomeID) {
         this(biomeID, true);
@@ -58,27 +63,27 @@ public abstract class BiomeGenBaseSimple extends BiomeGenBase {
         blockLayers = newBlockLayers();
     }
 
-    protected List<BlockLayer> newBlockLayers() {
-        val blockLayers = new ArrayList<BlockLayer>();
-        blockLayers.add(new BlockLayer(topBlock(), topBlockMeta(), 1));
-        blockLayers.add(new BlockLayer(fillerBlock(), fillerBlockMeta(), 3, 6));
+    protected List<BiomeBlockLayer> newBlockLayers() {
+        val blockLayers = new ArrayList<BiomeBlockLayer>();
+        blockLayers.add(new BiomeBlockLayer(topBlock(), topBlockMeta(), 1));
+        blockLayers.add(new BiomeBlockLayer(fillerBlock(), fillerBlockMeta(), 3, 6));
         return blockLayers;
     }
 
     protected Block topBlock() {
-        return Blocks.grass;
+        return DEFAULT_TOP_BLOCK;
     }
 
     protected byte topBlockMeta() {
-        return 0;
+        return DEFAULT_TOP_BLOCK_META;
     }
 
     protected Block fillerBlock() {
-        return Blocks.dirt;
+        return DEFAULT_FILLER_BLOCK;
     }
 
     protected byte fillerBlockMeta() {
-        return 0;
+        return DEFAULT_FILLER_BLOCK_META;
     }
 
     @Override
@@ -92,7 +97,7 @@ public abstract class BiomeGenBaseSimple extends BiomeGenBase {
         generateBedrock(random, blocks, blockPosX, blockPosZ);
 
         var blockPosY = firstNonAirBlock(blocks, blockPosX, blockPosZ);
-        for (BlockLayer blockLayer : blockLayers) {
+        for (BiomeBlockLayer blockLayer : blockLayers) {
             if (minTerrainBlocksY() > blockPosY)
                 return;
 
@@ -126,6 +131,6 @@ public abstract class BiomeGenBaseSimple extends BiomeGenBase {
     }
 
     protected int minTerrainBlocksY() {
-        return 50;
+        return DEFAULT_MIN_TERRAIN_HEIGHT;
     }
 }
