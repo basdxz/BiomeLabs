@@ -23,31 +23,39 @@
  *
  */
 
-package com.basdxz.biomelabs.util;
+package com.basdxz.biomelabs.api;
 
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
-import lombok.val;
-import org.spongepowered.noise.module.Module;
 
-import static lombok.AccessLevel.PRIVATE;
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class DimGenerator {
+    @Builder
+    public static IDimensionReference createDesolateWasteland(String dimName, int dimID, int biomeID) {
+        /*
+            Register Blocks
+            Register Biome
+            Register Chunk provider (?)
+            Register Dimension
+            Register Debug item for tp
+         */
 
-@NoArgsConstructor(access = PRIVATE)
-public final class NoiseUtil {
-    public static double[] chunkNoise(Module noiseGenerator, int blockPosX, int blockPosZ) {
-        val chunkNoise = new double[ChunkUtil.CHUNK_AREA];
-        ChunkUtil.iterateXZ((x, z) ->
-                chunkNoise[ChunkUtil.chunkSliceArrayIndex(x, z)]
-                        = noiseGenerator.getValue(blockPosX + x, 0, blockPosZ + z));
-        return chunkNoise;
-    }
+        return new IDimensionReference() {
+            @Override
+            public String dimName() {
+                return dimName;
+            }
 
-    public static double contrast(final double value, double strength) {
-        strength *= -1;
-        if (strength >= 0) {
-            strength++;
-        } else {
-            strength = 1 / (1 - strength);
-        }
-        return Math.signum(value - 0.5) * (Math.pow(Math.abs(value - 0.5), strength) / Math.pow(0.5, strength - 1)) + 0.5;
+            @Override
+            public int dimID() {
+                return dimID;
+            }
+
+            @Override
+            public int[] biomeIDs() {
+                return new int[]{biomeID};
+            }
+        };
     }
 }
