@@ -25,22 +25,25 @@
 
 package com.basdxz.biomelabs.util;
 
+import com.basdxz.biomelabs.worldgen.noise.INoiseGenerator;
 import lombok.NoArgsConstructor;
 import lombok.val;
-import org.spongepowered.noise.module.Module;
 
 import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
 public final class NoiseUtil {
-    public static double[] chunkNoise(Module noiseGenerator, int blockPosX, int blockPosZ) {
+    public static double[] chunkNoise(INoiseGenerator noiseGenerator, int blockPosX, int blockPosZ) {
         val chunkNoise = new double[ChunkUtil.CHUNK_AREA];
         ChunkUtil.iterateXZ((x, z) ->
                 chunkNoise[ChunkUtil.chunkSliceArrayIndex(x, z)]
-                        = noiseGenerator.getValue(blockPosX + x, 0, blockPosZ + z));
+                        = noiseGenerator.generate(blockPosX + x, blockPosZ + z));
         return chunkNoise;
     }
 
+    /*
+        Tec wrote this masterpiece of a contrast function
+     */
     public static double contrast(final double value, double strength) {
         strength *= -1;
         if (strength >= 0) {
