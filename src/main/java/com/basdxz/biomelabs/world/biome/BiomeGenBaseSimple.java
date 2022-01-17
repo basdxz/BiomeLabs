@@ -39,7 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class BiomeGenBaseSimple extends BiomeGenBase {
+public abstract class BiomeGenBaseSimple extends BiomeGenBase {
     protected final static int BEDROCK_THICKNESS = 5;
     protected final static Block DEFAULT_TOP_BLOCK = Blocks.grass;
     protected final static byte DEFAULT_TOP_BLOCK_META = 0;
@@ -60,8 +60,11 @@ public class BiomeGenBaseSimple extends BiomeGenBase {
         this.spawnableWaterCreatureList.clear();
         this.spawnableCaveCreatureList.clear();
         this.setHeight(new Height(0.125F, 0.0005F));
+        setBiomeName(newBiomeName());
         blockLayers = newBlockLayers();
     }
+
+    protected abstract String newBiomeName();
 
     protected List<BiomeBlockLayer> newBlockLayers() {
         val blockLayers = new ArrayList<BiomeBlockLayer>();

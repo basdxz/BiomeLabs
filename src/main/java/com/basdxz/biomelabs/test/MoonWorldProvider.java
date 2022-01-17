@@ -25,20 +25,22 @@
 
 package com.basdxz.biomelabs.test;
 
+import com.basdxz.biomelabs.world.chunk.ChunkGeneratorBase;
 import net.minecraft.world.biome.WorldChunkManager;
+import net.minecraft.world.chunk.IChunkProvider;
 
-public class WorldProviderMoon extends DesolateWastelandWorldProvider {
+public class MoonWorldProvider extends DesolateWastelandWorldProvider {
     protected static int dimID;
     protected static WorldChunkManager chunkManager;
 
     @Override
     public void dimID(int dimID) {
-        WorldProviderMoon.dimID = dimID;
+        MoonWorldProvider.dimID = dimID;
     }
 
     @Override
     public void chunkManager(WorldChunkManager chunkManager) {
-        WorldProviderMoon.chunkManager = chunkManager;
+        MoonWorldProvider.chunkManager = chunkManager;
     }
 
     @Override
@@ -54,5 +56,20 @@ public class WorldProviderMoon extends DesolateWastelandWorldProvider {
     @Override
     public String getDimensionName() {
         return "Moon";
+    }
+
+    @Override
+    public IChunkProvider createChunkGenerator() {
+        return new ChunkGeneratorBase(worldObj) {
+            @Override
+            public long seedOffset() {
+                return 65561565646556561L;
+            }
+
+            @Override
+            public String generatorName() {
+                return getDimensionName();
+            }
+        };
     }
 }

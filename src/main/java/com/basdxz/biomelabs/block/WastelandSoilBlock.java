@@ -47,7 +47,7 @@ public class WastelandSoilBlock extends Block {
     protected IIcon topSoil;
     protected IIcon fillerSoil;
 
-    public WastelandSoilBlock(String dimName, String modid) {
+    public WastelandSoilBlock(String modid, String dimName) {
         super(Material.ground);
         this.dimName = dimName;
         this.modid = modid;

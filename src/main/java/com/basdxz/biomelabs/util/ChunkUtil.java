@@ -67,8 +67,8 @@ public final class ChunkUtil {
 
     public static void iterateXZ(BiConsumer<Integer, Integer> consumer) {
         for (int x = 0; x < CHUNK_LENGTH_WIDTH; x++)
-            for (int y = 0; y < CHUNK_LENGTH_WIDTH; y++)
-                consumer.accept(x, y);
+            for (int z = 0; z < CHUNK_LENGTH_WIDTH; z++)
+                consumer.accept(x, z);
     }
 
     public static int blockPosToBlockInChunkPos(int blockPos) {

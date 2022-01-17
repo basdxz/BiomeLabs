@@ -25,7 +25,10 @@
 
 package com.basdxz.biomelabs;
 
-import com.basdxz.biomelabs.block.WastelandSoilBlock;
+import com.basdxz.biomelabs.api.DimGenerator;
+import com.basdxz.biomelabs.api.DimensionReference;
+import com.basdxz.biomelabs.item.ItemDebug;
+import com.basdxz.biomelabs.test.MoonWorldProvider;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 
@@ -33,9 +36,11 @@ import static com.basdxz.biomelabs.Tags.*;
 
 @Mod(modid = MODID, version = VERSION, name = MODNAME, acceptedMinecraftVersions = "[1.7.10]")
 public class BiomeLabs {
+    public static DimensionReference woag;
+
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        System.out.println("BiomeLabs Loaded!");
-        new WastelandSoilBlock("Moon", MODID);
+        woag = DimGenerator.createDesolateWasteland(MODID, new MoonWorldProvider(), 2, 173);
+        new ItemDebug();
     }
 }

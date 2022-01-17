@@ -25,10 +25,20 @@
 
 package com.basdxz.biomelabs.api;
 
-public interface IDimensionReference {
-    String dimName();
+import lombok.Builder;
+import lombok.Data;
+import net.minecraft.block.Block;
+import net.minecraft.world.biome.BiomeGenBase;
 
-    int dimID();
-
-    int[] biomeIDs();
+@Data
+@Builder
+public class DimensionReference {
+    protected final String dimName;
+    protected final int dimID;
+    protected final int biomeID;
+    protected final BiomeGenBase biome;
+    protected final Block topSoilBlock;
+    protected final byte topSoilBlockMeta;
+    protected final Block fillerSoilBlock;
+    protected final byte fillerSoilBlockMeta;
 }

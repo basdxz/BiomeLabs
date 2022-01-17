@@ -29,24 +29,28 @@ import com.basdxz.biomelabs.block.WastelandSoilBlock;
 import com.basdxz.biomelabs.test.DesolateWastelandWorldProvider;
 import com.basdxz.biomelabs.world.biome.BiomeGenBaseSimple;
 import com.basdxz.biomelabs.world.chunk.MonoBiomeWorldChunkManager;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.val;
+import lombok.*;
 import net.minecraft.block.Block;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.DimensionManager;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class DimGenerator {
     @Builder
-    public static IDimensionReference createDesolateWasteland(String modid,
-                                                              DesolateWastelandWorldProvider worldProvider,
+    public static DimensionReference createDesolateWasteland(@NonNull String modid,
+                                                              @NonNull DesolateWastelandWorldProvider worldProvider,
                                                               int dimID, int biomeID) {
+        val topSoilBlock = new WastelandSoilBlock(modid, worldProvider.getDimensionName());
+        val topSoilBlockMeta = (byte) 0;
+        val fillerSoilBlock = topSoilBlock;
+        val fillerSoilBlockMeta = (byte) 1;
+
         val biome = new BiomeGenBaseSimple(biomeID) {
-            private Block topSoilBlock = new WastelandSoilBlock(modid, worldProvider.getDimensionName());
-            private byte topSoilBlockMeta = (byte) 0;
-            private Block fillerSoilBlock = topSoilBlock;
-            private byte fillerSoilBlockMeta = (byte) 1;
+            @Override
+            protected String newBiomeName() {
+                return worldProvider.getDimensionName();
+            }
 
             protected Block topBlock() {
                 return topSoilBlock;
@@ -65,27 +69,23 @@ public final class DimGenerator {
             }
         };
 
+        BiomeDictionary.registerBiomeType(biome);
+        BiomeManager.addSpawnBiome(biome);
+
         worldProvider.dimID(dimID);
         worldProvider.chunkManager(new MonoBiomeWorldChunkManager(biome));
 
         DimensionManager.registerProviderType(dimID, worldProvider.getClass(), false);
         DimensionManager.registerDimension(dimID, dimID);
 
-        return new IDimensionReference() {
-            @Override
-            public String dimName() {
-                return worldProvider.getDimensionName();
-            }
-
-            @Override
-            public int dimID() {
-                return dimID;
-            }
-
-            @Override
-            public int[] biomeIDs() {
-                return new int[]{biomeID};
-            }
-        };
+        return DimensionReference.builder()
+                .dimName(worldProvider.getDimensionName())
+                .dimID(dimID)
+                .biome(biome)
+                .topSoilBlock(topSoilBlock)
+                .topSoilBlockMeta(topSoilBlockMeta)
+                .fillerSoilBlockMeta(topSoilBlockMeta)
+                .fillerSoilBlockMeta(fillerSoilBlockMeta)
+                .build();
     }
 }

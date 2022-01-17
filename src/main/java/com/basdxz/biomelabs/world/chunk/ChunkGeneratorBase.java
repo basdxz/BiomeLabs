@@ -167,7 +167,6 @@ public abstract class ChunkGeneratorBase implements IChunkProvider {
         MinecraftForge.EVENT_BUS.post(event);
         if (event.getResult() == Event.Result.DENY)
             return;
-
         ChunkUtil.iterateXZ((x, z) -> biomes[ChunkUtil.chunkSliceArrayIndex(x, z)].genTerrainBlocks(world, random, blocks, blockMetas, blockPosX + x, blockPosZ + z, stoneNoise[ChunkUtil.chunkSliceArrayIndex(x, z)]));
     }
 
