@@ -27,8 +27,8 @@ package com.basdxz.biomelabs;
 
 import com.basdxz.biomelabs.api.DimGenerator;
 import com.basdxz.biomelabs.api.DimensionReference;
+import com.basdxz.biomelabs.api.ExampleWorldProvider;
 import com.basdxz.biomelabs.item.ItemDebug;
-import com.basdxz.biomelabs.test.MoonWorldProvider;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 
@@ -40,7 +40,7 @@ public class BiomeLabs {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        woag = DimGenerator.createDesolateWasteland(MODID, new MoonWorldProvider(), 2, 173);
+        woag = DimGenerator.createDesolateWasteland(MODID, new ExampleWorldProvider(), 2, 173);
         new ItemDebug();
     }
 }

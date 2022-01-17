@@ -26,16 +26,20 @@
 package com.basdxz.biomelabs.api;
 
 import com.basdxz.biomelabs.block.WastelandSoilBlock;
-import com.basdxz.biomelabs.test.DesolateWastelandWorldProvider;
 import com.basdxz.biomelabs.world.biome.BiomeGenBaseSimple;
 import com.basdxz.biomelabs.world.chunk.MonoBiomeWorldChunkManager;
-import lombok.*;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.val;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.DimensionManager;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+import static lombok.AccessLevel.PRIVATE;
+
+@NoArgsConstructor(access = PRIVATE)
 public final class DimGenerator {
     @Builder
     public static DimensionReference createDesolateWasteland(@NonNull String modid,

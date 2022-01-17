@@ -35,7 +35,6 @@ import net.minecraft.world.biome.BiomeGenBase;
 public class DimensionReference {
     protected final String dimName;
     protected final int dimID;
-    protected final int biomeID;
     protected final BiomeGenBase biome;
     protected final Block topSoilBlock;
     protected final byte topSoilBlockMeta;

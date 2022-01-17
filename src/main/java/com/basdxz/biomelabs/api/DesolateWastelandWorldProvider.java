@@ -23,53 +23,26 @@
  *
  */
 
-package com.basdxz.biomelabs.test;
+package com.basdxz.biomelabs.api;
 
-import com.basdxz.biomelabs.world.chunk.ChunkGeneratorBase;
+import com.basdxz.biomelabs.world.provider.WorldProviderBase;
+import lombok.experimental.Accessors;
 import net.minecraft.world.biome.WorldChunkManager;
-import net.minecraft.world.chunk.IChunkProvider;
 
-public class MoonWorldProvider extends DesolateWastelandWorldProvider {
-    protected static int dimID;
-    protected static WorldChunkManager chunkManager;
 
-    @Override
-    public void dimID(int dimID) {
-        MoonWorldProvider.dimID = dimID;
-    }
+@Accessors(fluent = true)
+public abstract class DesolateWastelandWorldProvider extends WorldProviderBase {
+    /**
+     * Must set a static value inside implementing classes.
+     *
+     * @param dimID The Dimension ID to store
+     */
+    public abstract void dimID(int dimID);
 
-    @Override
-    public void chunkManager(WorldChunkManager chunkManager) {
-        MoonWorldProvider.chunkManager = chunkManager;
-    }
-
-    @Override
-    protected int dimensionId() {
-        return dimID;
-    }
-
-    @Override
-    protected WorldChunkManager worldChunkManager() {
-        return chunkManager;
-    }
-
-    @Override
-    public String getDimensionName() {
-        return "Moon";
-    }
-
-    @Override
-    public IChunkProvider createChunkGenerator() {
-        return new ChunkGeneratorBase(worldObj) {
-            @Override
-            public long seedOffset() {
-                return 65561565646556561L;
-            }
-
-            @Override
-            public String generatorName() {
-                return getDimensionName();
-            }
-        };
-    }
+    /**
+     * Must set a static value inside implementing classes.
+     *
+     * @param chunkManager The WorldChunkManager to store
+     */
+    public abstract void chunkManager(WorldChunkManager chunkManager);
 }
