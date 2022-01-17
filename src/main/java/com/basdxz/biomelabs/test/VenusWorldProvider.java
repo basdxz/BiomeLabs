@@ -23,19 +23,17 @@
  *
  */
 
-package com.basdxz.biomelabs.api;
+package com.basdxz.biomelabs.test;
 
+import com.basdxz.biomelabs.api.DesolateWastelandWorldProvider;
 import com.basdxz.biomelabs.world.chunk.ChunkGeneratorBase;
 import net.minecraft.block.Block;
 import net.minecraft.world.biome.WorldChunkManager;
 import net.minecraft.world.chunk.IChunkProvider;
 
-/*
-    Copy this entire class once per every new dimension you want to create, inner classes should work too.
- */
 @SuppressWarnings("AccessStaticViaInstance")
-public final class ExampleWorldProvider extends DesolateWastelandWorldProvider {
-    private static final String DIMENSION_NAME = "Example"; //CHANGE THIS
+public final class VenusWorldProvider extends DesolateWastelandWorldProvider {
+    private static final String DIMENSION_NAME = "Venus";
 
     private static Block stoneBlock;
     private static byte stoneBlockMeta;

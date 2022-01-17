@@ -27,10 +27,13 @@ package com.basdxz.biomelabs.api;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.world.biome.BiomeGenBase;
 
 @Data
+@Accessors(fluent = true)
 @Builder
 public class DimensionReference {
     protected final String dimName;
@@ -40,4 +43,7 @@ public class DimensionReference {
     protected final byte topSoilBlockMeta;
     protected final Block fillerSoilBlock;
     protected final byte fillerSoilBlockMeta;
+    protected final Block stoneBlock;
+    protected final byte stoneBlockMeta;
+    protected final Item teleportItem;
 }

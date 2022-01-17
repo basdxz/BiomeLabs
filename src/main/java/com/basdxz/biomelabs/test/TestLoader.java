@@ -23,16 +23,21 @@
  *
  */
 
-package com.basdxz.biomelabs;
+package com.basdxz.biomelabs.test;
 
-import cpw.mods.fml.common.Mod;
+import com.basdxz.biomelabs.api.DimGenerator;
+import com.basdxz.biomelabs.api.DimensionReference;
 
-import static com.basdxz.biomelabs.Tags.*;
+import java.util.ArrayList;
 
-@Mod(modid = MODID, version = VERSION, name = MODNAME, acceptedMinecraftVersions = "[1.7.10]")
-public class BiomeLabs {
-    //@Mod.EventHandler
-    //public void init(FMLInitializationEvent event) {
-    //    TestLoader.load();
-    //}
+import static com.basdxz.biomelabs.Tags.MODID;
+
+public class TestLoader {
+    public static ArrayList<DimensionReference> dimensions = new ArrayList<>();
+
+    public static void load() {
+        dimensions.add(DimGenerator.createDesolateWasteland(MODID, new MoonWorldProvider(), 2, 173));
+        dimensions.add(DimGenerator.createDesolateWasteland(MODID, new MarsWorldProvider(), 3, 174));
+        dimensions.add(DimGenerator.createDesolateWasteland(MODID, new VenusWorldProvider(), 4, 175));
+    }
 }

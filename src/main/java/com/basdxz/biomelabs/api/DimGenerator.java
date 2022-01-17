@@ -26,6 +26,7 @@
 package com.basdxz.biomelabs.api;
 
 import com.basdxz.biomelabs.block.WastelandSoilBlock;
+import com.basdxz.biomelabs.item.DimensionTeleportItem;
 import com.basdxz.biomelabs.world.biome.BiomeGenBaseSimple;
 import com.basdxz.biomelabs.world.chunk.MonoBiomeWorldChunkManager;
 import lombok.Builder;
@@ -49,6 +50,8 @@ public final class DimGenerator {
         val topSoilBlockMeta = (byte) 0;
         val fillerSoilBlock = topSoilBlock;
         val fillerSoilBlockMeta = (byte) 1;
+        val stoneBlock = topSoilBlock;
+        val stonelBlockMeta = (byte) 2;
 
         val biome = new BiomeGenBaseSimple(biomeID) {
             @Override
@@ -76,11 +79,15 @@ public final class DimGenerator {
         BiomeDictionary.registerBiomeType(biome);
         BiomeManager.addSpawnBiome(biome);
 
+        worldProvider.stoneBlock(stoneBlock);
+        worldProvider.stoneBlockMeta(stonelBlockMeta);
         worldProvider.dimID(dimID);
         worldProvider.chunkManager(new MonoBiomeWorldChunkManager(biome));
 
         DimensionManager.registerProviderType(dimID, worldProvider.getClass(), false);
         DimensionManager.registerDimension(dimID, dimID);
+
+        val teleportItem = new DimensionTeleportItem(modid, dimID, worldProvider.getDimensionName());
 
         return DimensionReference.builder()
                 .dimName(worldProvider.getDimensionName())
@@ -88,8 +95,9 @@ public final class DimGenerator {
                 .biome(biome)
                 .topSoilBlock(topSoilBlock)
                 .topSoilBlockMeta(topSoilBlockMeta)
-                .fillerSoilBlockMeta(topSoilBlockMeta)
+                .fillerSoilBlock(fillerSoilBlock)
                 .fillerSoilBlockMeta(fillerSoilBlockMeta)
+                .teleportItem(teleportItem)
                 .build();
     }
 }

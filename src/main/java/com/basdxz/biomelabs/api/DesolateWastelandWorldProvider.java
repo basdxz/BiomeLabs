@@ -27,11 +27,26 @@ package com.basdxz.biomelabs.api;
 
 import com.basdxz.biomelabs.world.provider.WorldProviderBase;
 import lombok.experimental.Accessors;
+import net.minecraft.block.Block;
 import net.minecraft.world.biome.WorldChunkManager;
 
 
 @Accessors(fluent = true)
 public abstract class DesolateWastelandWorldProvider extends WorldProviderBase {
+    /**
+     * Must set a static value inside implementing classes.
+     *
+     * @param block The Block to store
+     */
+    public abstract void stoneBlock(Block block);
+
+    /**
+     * Must set a static value inside implementing classes.
+     *
+     * @param stoneBlockMeta The block meta to store
+     */
+    public abstract void stoneBlockMeta(byte stoneBlockMeta);
+
     /**
      * Must set a static value inside implementing classes.
      *

@@ -36,6 +36,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -44,14 +45,16 @@ public class WastelandSoilBlock extends Block {
     protected final String dimName;
     protected final String modid;
 
-    protected IIcon topSoil;
-    protected IIcon fillerSoil;
+    protected IIcon soilTop;
+    protected IIcon soilSide;
+    protected IIcon dirt;
+    protected IIcon stone;
 
     public WastelandSoilBlock(String modid, String dimName) {
         super(Material.ground);
-        this.dimName = dimName;
+        this.dimName = dimName.toLowerCase();
         this.modid = modid;
-        setBlockName(String.format("%s_soil", dimName.toLowerCase()));
+        setBlockName(String.format("%s_soil", this.dimName));
         GameRegistry.registerBlock(this, WastelandSoilItemBlock.class, getUnlocalizedName());
     }
 
@@ -61,6 +64,7 @@ public class WastelandSoilBlock extends Block {
     public void getSubBlocks(Item item, CreativeTabs creativeTabs, List itemList) {
         itemList.add(new ItemStack(item, 1, 0));
         itemList.add(new ItemStack(item, 1, 1));
+        itemList.add(new ItemStack(item, 1, 2));
     }
 
     @Override
@@ -71,12 +75,29 @@ public class WastelandSoilBlock extends Block {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
-        fillerSoil = iconRegister.registerIcon(MessageFormat.format("{0}:{1}/{1}_bottomSoil", modid, dimName));
-        topSoil = iconRegister.registerIcon(MessageFormat.format("{0}:{1}/{1}_fillerSoil", modid, dimName));
+        soilTop = registerIcon(iconRegister, "soil_top");
+        soilSide = registerIcon(iconRegister, "soil_side");
+        dirt = registerIcon(iconRegister, "dirt");
+        stone = registerIcon(iconRegister, "stone");
+    }
+
+    protected IIcon registerIcon(IIconRegister iconRegister, String iconName) {
+        return iconRegister.registerIcon(MessageFormat.format("{0}:{1}/{1}_{2}", modid, dimName, iconName));
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
-        return meta > 0 ? fillerSoil : topSoil;
+        if (meta == 0) {
+            if (side == ForgeDirection.UP.ordinal())
+                return soilTop;
+            if (side == ForgeDirection.DOWN.ordinal())
+                return dirt;
+            return soilSide;
+        } else if (meta == 1) {
+            return dirt;
+        } else {
+            return stone;
+        }
     }
 }
