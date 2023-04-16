@@ -28,14 +28,13 @@ package com.basdxz.biomelabs.world.noise;
 import com.basdxz.biomelabs.util.NoiseUtil;
 import lombok.val;
 import org.spongepowered.noise.exception.NoModuleException;
-import org.spongepowered.noise.module.Module;
+import org.spongepowered.noise.module.NoiseModule;
 
 /**
  * Contrast module that with positive
  *
- * @sourceModules 1
  */
-public class Contrast extends Module {
+public class Contrast extends NoiseModule {
     public static final double DEFAULT_STRENGTH = 1D;
 
     protected double strength = Contrast.DEFAULT_STRENGTH;
@@ -49,9 +48,9 @@ public class Contrast extends Module {
      *
      * @param source the input module
      */
-    public Contrast(final Module source) {
+    public Contrast(final NoiseModule source) {
         this();
-        this.setSourceModule(0, source);
+        setSourceModule(0, source);
     }
 
     /**
@@ -59,8 +58,8 @@ public class Contrast extends Module {
      *
      * @return the strength factor for this noise module.
      */
-    public double getStrength() {
-        return this.strength;
+    public double strength() {
+        return strength;
     }
 
     /**
@@ -72,16 +71,16 @@ public class Contrast extends Module {
      *
      * @param strength the strength factor for this noise module.
      */
-    public void setStrength(final double strength) {
+    public void strength(final double strength) {
         this.strength = strength;
     }
 
     //TODO replace that 0D with 'close enough to 0D'
     @Override
-    public double getValue(final double x, final double y, final double z) {
-        if (this.sourceModule[0] == null)
+    public double get(final double x, final double y, final double z) {
+        if (sourceModule[0] == null)
             throw new NoModuleException(0);
-        val value = this.sourceModule[0].getValue(x, y, z);
+        val value = sourceModule[0].get(x, y, z);
         return strength == 0D ? value : NoiseUtil.contrast(value, strength);
     }
 }

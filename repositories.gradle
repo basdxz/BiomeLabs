@@ -3,6 +3,7 @@ repositories {
         name = "CodeChicken Maven"
         url = "http://chickenbones.net/maven/"
     }
+
     maven {
         url "https://repo.spongepowered.org/repository/maven-public/"
     }

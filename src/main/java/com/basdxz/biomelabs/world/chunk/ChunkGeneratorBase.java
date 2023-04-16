@@ -46,7 +46,7 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.terraingen.ChunkProviderEvent;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
-import org.spongepowered.noise.module.Module;
+import org.spongepowered.noise.module.NoiseModule;
 import org.spongepowered.noise.module.modifier.Range;
 import org.spongepowered.noise.module.source.Perlin;
 
@@ -79,15 +79,15 @@ public abstract class ChunkGeneratorBase implements IChunkProvider {
         perlin.setSeed(RandomUtil.longSeedToIntSeed(RandomUtil.combinedSeed(world.getSeed(), seedOffset())));
         perlin.setFrequency(noiseFrequency());
         val range = new Range(perlin);
-        range.setBounds(0, perlin.getMaxValue(), 0, 1);
+        range.setBounds(0, perlin.maxValue(), 0, 1);
         val contrast = new Contrast(range);
-        contrast.setStrength(noiseContrast());
+        contrast.strength(noiseContrast());
         return new INoiseGenerator() {
-            private final Module noiseGenerator = contrast;
+            private final NoiseModule noiseGenerator = contrast;
 
             @Override
             public double generate(double posX, double posZ) {
-                return noiseGenerator.getValue(posX, 0, posZ);
+                return noiseGenerator.get(posX, 0, posZ);
             }
         };
     }

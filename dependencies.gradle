@@ -1,13 +1,13 @@
 dependencies {
-    // Java extensions
-    compileOnly("org.projectlombok:lombok:1.18.22")
-    annotationProcessor("org.projectlombok:lombok:1.18.22")
+    // Lombok
+    compileOnly("org.projectlombok:lombok:1.18.26")
+    annotationProcessor("org.projectlombok:lombok:1.18.26")
 
-    shadowCompile("org.spongepowered:noise:2.0.0-SNAPSHOT")
-    //shadowCompile("no.digipost:digg:0.30")
+    // Noise Generator
+    shadowImplementation("org.spongepowered:noise:2.0.0-20221103.042342-27")
 
     // NEI
-    compile("codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev")
-    compile("codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev")
-    compile("codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev")
+    runtimeOnly("codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev")
+    runtimeOnly("codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev")
+    runtimeOnly("codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev")
 }
